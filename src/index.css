@@ -48,14 +48,10 @@
   }
 
   li.selected {
-    @apply bg-white/70 text-black backdrop-blur-sm shadow-xl -top-0.5;
+    @apply bg-white/70 text-black backdrop-blur-sm shadow-xl;
   }
 
   .house {
     @apply w-1/4;
-  }
-
-  .house-title {
-    @apply text-yellow-400 drop-shadow-3l;
   }
 }

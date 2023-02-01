@@ -4,13 +4,13 @@ export const Question = ({ order, setOrder, updateHouse }) => {
     
     const [select, onSelect] = useState("")
 
-    const count = useRef(0)
+    const count = useRef('')
 
     useEffect(() => {
 
         return () => {
             onSelect(() => '')
-            count.current = 0
+            count.current = ''
 
         }
     }, [order])
@@ -67,24 +67,23 @@ export const Question = ({ order, setOrder, updateHouse }) => {
     const {question, answer } = data[key]
 
     const selectAnswer = ({ house }) => {
-        
-        count.current += 1
-        if (count.current > 1) {
-            return
-        }
-
+        count.current  = house;
         onSelect(() => house)
-        
+    }
+
+    const onNext = () => {
+        setOrder(prevOrder => prevOrder + 1)
         updateHouse(prevHouse => {
-                prevHouse[house] += 1
-                return prevHouse
-        })
+            prevHouse[count.current] += 1
+            return prevHouse
+        }
+    )
     }
     
     return (
         <>
-            <div className='harry__qa py-8'>
-                <h2 className='harry__question text-4xl text-yellow-400'>{question}</h2>
+            <div className='harry__qa p-8 bg-black/40 rounded-3xl backdrop-blur-sm'>
+                <h2 className='harry__question text-4xl'>{question}</h2>
                 <div className='harry__answer text-xl'>
                     <ul className='harry__options mb-8'>
                     {Object.keys(answer).map( (item, index) => {
@@ -92,7 +91,7 @@ export const Question = ({ order, setOrder, updateHouse }) => {
 
                         return (
                             <li
-                            className={`flex relative before:content-[url(./assets/marker.svg)] before:h-full before:relative leading-0 align-center cursor-pointer focus:bg-black rounded-full p-4 border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
+                            className={`flex relative before:content-[url(./assets/marker.svg)] before:h-full before:mr-2 before:relative leading-0 align-center cursor-pointer rounded-full p-4 border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
                             data-house={house}
                             onClick={(e) => selectAnswer(e.target.dataset)}
                             key={house}>{ans}</li>
@@ -106,7 +105,7 @@ export const Question = ({ order, setOrder, updateHouse }) => {
                             type='button'
                             className={`btn inline-block ${select ? 'btn-primary' : 'disabled:bg-grey'}`}
                             disabled={!select}
-                            onClick={() => setOrder(prevOrder => prevOrder + 1)}>
+                            onClick={onNext}>
                             Next
                         </button>
                     }
