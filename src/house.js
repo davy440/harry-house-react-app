@@ -8,25 +8,29 @@ export const House = () => {
 
     const [questions, setQuestions] = useState(false)
 
-    const [questionsIn, api] = useTransition(setQuestions, () => (
-        {
-            from: {
-                opacity: 0
-            },
-            enter: {
-                opacity: 1
-            },
-            leave: {
-                opacity: 0
-            }
-    }))
+    // const [questionsIn, api] = useTransition(setQuestions, () => (
+    //     {
+    //         from: {
+    //             opacity: 0,
+    //             x: 100
+    //         },
+    //         enter: {
+    //             opacity: 1,
+    //             x: 0
+    //         },
+    //         leave: {
+    //             opacity: 0,
+    //             x: -100
+    //         }
+    // }))
 
-    useEffect(() => {
-        api.start()
-    }, [])
+    // useEffect(() => {
+    //     api.start()
+    // }, [])
     
-    return questionsIn((style, item) => (
-        <animated.div className='harry__house relative h-screen overflow-hidden flex flex-col justify-center items-center' style={style}>
+    // return questionsIn((style, item) => (
+        return (
+        <animated.div className='harry__house relative h-screen overflow-hidden flex flex-col justify-center items-center'>
             <img
                 src={ sorterHat }
                 className='absolute w-full object-cover -z-1 h-full left-0 top-0 object-center'
@@ -36,10 +40,10 @@ export const House = () => {
             className='harry__questionsWrapper relative text-white w-full align-center overflow-y-auto'>
             {
                 questions
-                ? <Questions style={style}/>
-                : <Intro setQuestions={ setQuestions } style={style} />
+                ? <Questions />
+                : <Intro setQuestions={ setQuestions } />
             }
             </div>
         </animated.div>
-    ))
+    )
 }
