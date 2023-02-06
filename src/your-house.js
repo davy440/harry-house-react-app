@@ -3,7 +3,6 @@ import hufflepuff from './assets/houses/hufflepuff.png';
 import ravenclaw from './assets/houses/ravenclaw.png';
 import slytherin from './assets/houses/slytherin.png';
 import { useSpring, animated } from '@react-spring/web';
-import { useEffect } from 'react';
 
 export const YourHouse = ({ house }) => {
 
