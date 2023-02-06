@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react';
 import './App.css';
-import { animated, config, useTransition } from '@react-spring/web';
+import { animated, useTransition } from '@react-spring/web';
 import { Banner } from './Banner';
 import { House } from './house';
 
@@ -14,7 +14,7 @@ export const App = () => {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    duration: 1000,
+    duration: 600,
   })
   
   return (

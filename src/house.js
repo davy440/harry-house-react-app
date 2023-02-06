@@ -8,28 +8,24 @@ export const House = () => {
 
     const [questions, setQuestions] = useState(false)
 
-    // const [questionsIn, api] = useTransition(setQuestions, () => (
-    //     {
-    //         from: {
-    //             opacity: 0,
-    //             x: 100
-    //         },
-    //         enter: {
-    //             opacity: 1,
-    //             x: 0
-    //         },
-    //         leave: {
-    //             opacity: 0,
-    //             x: -100
-    //         }
-    // }))
+    const [intro, api] = useTransition(questions, () => ({
+        from: {
+            opacity: 0
+        },
+        enter: {
+            opacity: 1,
+        },
+        leave: {
+            opacity: 0,
+        }
+    }))
 
-    // useEffect(() => {
-    //     api.start()
-    // }, [])
+    useEffect(() => {
+        console.log(api)
+        api.start()
+    })
     
-    // return questionsIn((style, item) => (
-        return (
+    return (
         <animated.div className='harry__house relative h-screen overflow-hidden flex flex-col justify-center items-center'>
             <img
                 src={ sorterHat }
@@ -37,12 +33,13 @@ export const House = () => {
                 alt='Sorting Hat'
             />
             <div
-            className='harry__questionsWrapper relative text-white w-full align-center overflow-y-auto'>
-            {
-                questions
-                ? <Questions />
-                : <Intro setQuestions={ setQuestions } />
-            }
+            className='harry__questionsWrapper relative h-full flex justify-center items-center text-white w-full align-center overflow-y-auto'>
+                {
+                intro((style, item) =>
+                    item
+                    ? <animated.div style={style} className="w-full"><Questions /></animated.div>
+                    : <animated.div className='harry__house--intro absolute text-center w-11/12 md:w-8/12 lg:w-6/12 mx-auto py-4' style={style}><Intro setQuestions={ setQuestions } /></animated.div>
+                )}
             </div>
         </animated.div>
     )
