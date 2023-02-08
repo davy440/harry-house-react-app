@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { useSprings, animated, springRef, useSpringRef, config } from "@react-spring/web"
+import { useSprings, useTrail, animated } from "@react-spring/web"
 
 export const Question = ({ order, setOrder, updateHouse }) => {
 
@@ -56,23 +56,48 @@ export const Question = ({ order, setOrder, updateHouse }) => {
     
     const [select, onSelect] = useState("")
     const count = useRef('')
-    const api = useSpringRef()
-    const selectAnim = useSprings(ansKeys.length, Object.keys(data).map((item) => ({
-        ref: api,
-        from: {
-            background: 'transparent',
-            color: 'white'
-        },
-        config: {
-            tension: 350,
-            friction: 10
+    const [selectAnim, api] = useSprings(ansKeys.length, () => {
+        return {
+            from: {
+                opacity: 0,
+                background: 'transparent',
+                color: 'white',
+                y: -10,
+                scale: 0.95
+            },
+            config: {
+                mass: 1,
+                tension: 900,
+                friction: 1,
+                clamp: true
+            }
         }
-    })))
+    })
 
     useEffect(() => {
+        api.start((index) => ({
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            delay: () => {
+                return 100 + (100 * index)
+            },
+            config: {
+                mass: 1,
+                tension: 150,
+                friction: 15
+            }
+        }))
         return () => {
             onSelect(() => '')
             count.current = ''
+            api.set({
+                opacity: 0,
+                background: 'transparent',
+                color: 'white',
+                y: -10,
+                scale: 0.95
+            })
         }
     }, [order])
     
@@ -109,16 +134,15 @@ export const Question = ({ order, setOrder, updateHouse }) => {
             <div className='harry__answer text-xl'>
                 <ul className='harry__options mb-8'>
                     {
-                        selectAnim.map((animation, index ) => {
+                        selectAnim.map((animation, index) => {
                             const [ ans, house ] = Object.values(qaList.answer)[index]
-                            
                             return (
                                 <animated.li
                                 className={`flex relative before:content-[url(./assets/marker.svg)] before:h-full before:mr-2 before:relative leading-0 align-center cursor-pointer rounded-full p-4 border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
                                 data-house={house}
                                 style={animation}
                                 onClick={(e) => selectAnswer(e, index)}
-                                key={house}>{ans}</animated.li>
+                                key={`${house}${order}`}>{ans}</animated.li>
                             )
                         })
                     }

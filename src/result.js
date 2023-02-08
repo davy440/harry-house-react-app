@@ -9,8 +9,6 @@ export const Result = ({ house }) => {
         getResult(true)
     }
     return (
-        <div className='harry__resultWrapper text-center'>
-       {
        !result ?
         <>  
             <p className='font-title text-2xl md:text-4xl'>Hmmm... you indeed are interesting. <br/>I think I know where to put you! </p>
@@ -18,7 +16,5 @@ export const Result = ({ house }) => {
         </>
         :
         <YourHouse house={ house } />
-        }
-        </div>
     )
 }

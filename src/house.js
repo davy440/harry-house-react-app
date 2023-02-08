@@ -36,7 +36,7 @@ export const House = () => {
                 {
                 intro((style, item) =>
                     item
-                    ? <animated.div style={style} className="w-full"><Questions /></animated.div>
+                    ? <animated.div style={style} className="w-full h-full flex items-center justify-center"><Questions /></animated.div>
                     : <animated.div className='harry__house--intro absolute text-center w-11/12 md:w-8/12 lg:w-6/12 mx-auto py-4' style={style}><Intro setQuestions={ setQuestions } /></animated.div>
                 )}
             </div>
