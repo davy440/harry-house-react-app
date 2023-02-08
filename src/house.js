@@ -21,7 +21,6 @@ export const House = () => {
     }))
 
     useEffect(() => {
-        console.log(api)
         api.start()
     })
     

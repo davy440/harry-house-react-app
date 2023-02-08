@@ -1,20 +1,8 @@
 import { useState, useEffect, useRef } from "react"
+import { useSprings, animated, springRef, useSpringRef, config } from "@react-spring/web"
 
 export const Question = ({ order, setOrder, updateHouse }) => {
-    
-    const [select, onSelect] = useState("")
 
-    const count = useRef('')
-
-    useEffect(() => {
-
-        return () => {
-            onSelect(() => '')
-            count.current = ''
-
-        }
-    }, [order])
-    
     const data = {
         q1: {
             question: "What kind of games do you have in your phone?",
@@ -62,55 +50,90 @@ export const Question = ({ order, setOrder, updateHouse }) => {
             }
         }
     }
+
+    const qaList = data[`q${order}`]
+    const ansKeys = Object.keys(qaList.answer)
+    
+    const [select, onSelect] = useState("")
+    const count = useRef('')
+    const api = useSpringRef()
+    const selectAnim = useSprings(ansKeys.length, Object.keys(data).map((item) => ({
+        ref: api,
+        from: {
+            background: 'transparent',
+            color: 'white'
+        },
+        config: {
+            tension: 350,
+            friction: 10
+        }
+    })))
+
+    useEffect(() => {
+        return () => {
+            onSelect(() => '')
+            count.current = ''
+        }
+    }, [order])
     
     const key = `q${order}`
     const {question, answer } = data[key]
 
-    const selectAnswer = ({ house }) => {
-        count.current  = house;
+    const selectAnswer = (e, i) => {
+
+        api.start((index) => (
+            index === i
+            ? { background: 'rgba(255,255,255,0.7)', color: 'black' }
+            : { background: 'transparent', color: 'white' })
+        )
+
+        const { house } = e.target.dataset
+        count.current  = house
         onSelect(() => house)
+
     }
 
     const onNext = () => {
+
         setOrder(prevOrder => prevOrder + 1)
+
         updateHouse(prevHouse => {
             prevHouse[count.current] += 1
             return prevHouse
-        }
-    )
+        })
     }
     
     return (
-        <>
-            <div className='harry__qa p-8 bg-black/40 rounded-3xl backdrop-blur-sm'>
-                <h2 className='harry__question text-4xl'>{question}</h2>
-                <div className='harry__answer text-xl'>
-                    <ul className='harry__options mb-8'>
-                    {Object.keys(answer).map( (item, index) => {
-                        const [ans, house] = answer[item]
-
-                        return (
-                            <li
-                            className={`flex relative before:content-[url(./assets/marker.svg)] before:h-full before:mr-2 before:relative leading-0 align-center cursor-pointer rounded-full p-4 border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
-                            data-house={house}
-                            onClick={(e) => selectAnswer(e.target.dataset)}
-                            key={house}>{ans}</li>
-                        )
-                        
-                    })}
-                    </ul>
-                    
-                    {order <= Object.keys(data).length &&
-                        <button
-                            type='button'
-                            className={`btn inline-block ${select ? 'btn-primary' : 'disabled:bg-grey'}`}
-                            disabled={!select}
-                            onClick={onNext}>
-                            Next
-                        </button>
+        <div className='harry__qa p-8 bg-black/40 rounded-3xl backdrop-blur-sm'>
+            <h2 className='harry__question text-4xl'>{question}</h2>
+            <div className='harry__answer text-xl'>
+                <ul className='harry__options mb-8'>
+                    {
+                        selectAnim.map((animation, index ) => {
+                            const [ ans, house ] = Object.values(qaList.answer)[index]
+                            
+                            return (
+                                <animated.li
+                                className={`flex relative before:content-[url(./assets/marker.svg)] before:h-full before:mr-2 before:relative leading-0 align-center cursor-pointer rounded-full p-4 border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
+                                data-house={house}
+                                style={animation}
+                                onClick={(e) => selectAnswer(e, index)}
+                                key={house}>{ans}</animated.li>
+                            )
+                        })
                     }
-                </div>
+                </ul>
+                
+                {order <= Object.keys(data).length &&
+                    <button
+                        type='button'
+                        className={`btn inline-block ${select ? 'btn-primary' : 'disabled:bg-grey'}`}
+                        disabled={!select}
+                        onClick={onNext}>
+                        Next
+                    </button>
+                }
             </div>
-        </>
+        </div>
     )
 }

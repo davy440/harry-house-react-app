@@ -47,9 +47,9 @@
     @apply relative before:content[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before: bg-black;
   }
 
-  li.selected {
+  /* li.selected {
     @apply bg-white/70 text-black backdrop-blur-sm shadow-xl;
-  }
+  } */
 
   .house {
     @apply w-1/4;
