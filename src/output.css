@@ -432,6 +432,13 @@ h1{
   line-height: 1;
 }
 
+@media (min-width: 768px){
+  h1{
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
 h2{
   margin-bottom: 2rem;
   font-family: Philosopher, serif;
@@ -600,8 +607,15 @@ p{
   padding-right: 2rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+@media (min-width: 768px){
+  .btn{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
 }
 
 .btn:disabled,
@@ -661,6 +675,16 @@ p{
 .my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.my-3{
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.mx-4{
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mb-8{
@@ -769,6 +793,16 @@ p{
   padding-bottom: 1rem;
 }
 
+.py-3{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .text-center{
   text-align: center;
 }
@@ -782,14 +816,9 @@ p{
   line-height: 2.25rem;
 }
 
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-xl{
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.text-base{
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .text-2xl{
@@ -799,6 +828,10 @@ p{
 
 .leading-10{
   line-height: 2.5rem;
+}
+
+.leading-4{
+  line-height: 1rem;
 }
 
 .text-white{
@@ -823,9 +856,12 @@ p{
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
-/* li.selected {
-    @apply bg-white/70 text-black backdrop-blur-sm shadow-xl;
-  } */
+.line-clamp-1{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
 
 .house{
   width: 25%;
@@ -849,6 +885,16 @@ p{
 .before\:mr-2::before{
   content: var(--tw-content);
   margin-right: 0.5rem;
+}
+
+.before\:ml-2::before{
+  content: var(--tw-content);
+  margin-left: 0.5rem;
+}
+
+.before\:ml-4::before{
+  content: var(--tw-content);
+  margin-left: 1rem;
 }
 
 .before\:h-full::before{
@@ -883,6 +929,16 @@ p{
 @media (min-width: 768px){
   .md\:w-8\/12{
     width: 66.666667%;
+  }
+
+  .md\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .md\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .md\:text-4xl{

@@ -10,7 +10,7 @@
   }
 
   h1 {
-    @apply text-8xl;
+    @apply text-8xl md:text-6xl;
   }
 
   h2 {
@@ -25,7 +25,7 @@
 @layer components {
 
   .btn {
-    @apply text-xl px-8 py-3 rounded-full;
+    @apply text-xl px-8 py-3 rounded-full text-base md:text-lg;
   }
 
   .btn:disabled,
@@ -46,10 +46,6 @@
   .bg-overlay {
     @apply relative before:content[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before: bg-black;
   }
-
-  /* li.selected {
-    @apply bg-white/70 text-black backdrop-blur-sm shadow-xl;
-  } */
 
   .house {
     @apply w-1/4;

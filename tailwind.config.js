@@ -23,8 +23,13 @@ module.exports = {
       dropShadow: {
         '2l': '1px 1px 0 rgba(0,0,0,0.65)',
         '3l': '0 0 10px rgba(0,0,0,1)'
+      },
+      fontSize: {
+        html: '16px'
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 }

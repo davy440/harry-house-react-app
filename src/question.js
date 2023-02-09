@@ -130,19 +130,19 @@ export const Question = ({ order, setOrder, updateHouse }) => {
     
     return (
         <div className='harry__qa p-8 bg-black/40 rounded-3xl backdrop-blur-sm'>
-            <h2 className='harry__question text-4xl'>{question}</h2>
-            <div className='harry__answer text-xl'>
+            <h2 className='harry__question text-3xl md:text-4xl'>{question}</h2>
+            <div className='harry__answer text-base md:text-xl'>
                 <ul className='harry__options mb-8'>
                     {
                         selectAnim.map((animation, index) => {
                             const [ ans, house ] = Object.values(qaList.answer)[index]
                             return (
                                 <animated.li
-                                className={`flex relative before:content-[url(./assets/marker.svg)] before:h-full before:mr-2 before:relative leading-0 align-center cursor-pointer rounded-full p-4 border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
+                                className={`flex items-center relative before:content-[url(./assets/marker.svg)] before:h-full before:ml-4 before:relative align-center cursor-pointer rounded-full border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
                                 data-house={house}
                                 style={animation}
                                 onClick={(e) => selectAnswer(e, index)}
-                                key={`${house}${order}`}>{ans}</animated.li>
+                                key={`${house}${order}`}><span className="my-3 mx-4 line-clamp-1">{ans}</span></animated.li>
                             )
                         })
                     }
