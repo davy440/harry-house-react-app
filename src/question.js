@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { useSprings, useTrail, animated } from "@react-spring/web"
+import { useSprings, animated } from "@react-spring/web"
 
 export const Question = ({ order, setOrder, updateHouse }) => {
 
@@ -99,20 +99,21 @@ export const Question = ({ order, setOrder, updateHouse }) => {
                 scale: 0.95
             })
         }
+        // eslint-disable-next-line
     }, [order])
     
     const key = `q${order}`
-    const {question, answer } = data[key]
+    const {question } = data[key]
 
     const selectAnswer = (e, i) => {
-
+        console.log(e)
         api.start((index) => (
             index === i
             ? { background: 'rgba(255,255,255,0.7)', color: 'black' }
             : { background: 'transparent', color: 'white' })
         )
 
-        const { house } = e.target.dataset
+        const { house } = e.currentTarget.dataset
         count.current  = house
         onSelect(() => house)
 
@@ -129,34 +130,36 @@ export const Question = ({ order, setOrder, updateHouse }) => {
     }
     
     return (
-        <div className='harry__qa p-8 bg-black/40 rounded-3xl backdrop-blur-sm'>
-            <h2 className='harry__question text-3xl md:text-4xl'>{question}</h2>
-            <div className='harry__answer text-base md:text-xl'>
-                <ul className='harry__options mb-8'>
-                    {
-                        selectAnim.map((animation, index) => {
-                            const [ ans, house ] = Object.values(qaList.answer)[index]
-                            return (
-                                <animated.li
-                                className={`flex items-center relative before:content-[url(./assets/marker.svg)] before:h-full before:ml-4 before:relative align-center cursor-pointer rounded-full border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
-                                data-house={house}
-                                style={animation}
-                                onClick={(e) => selectAnswer(e, index)}
-                                key={`${house}${order}`}><span className="my-3 mx-4 line-clamp-1">{ans}</span></animated.li>
-                            )
-                        })
+        <div class="pt-20 w-11/12 md:w-8/12 lg:w-7/12 mx-auto">
+            <div className='harry__qa bg-dark backdrop-blur-sm'>
+                <h2 className='harry__question text-3xl md:text-4xl'>{question}</h2>
+                <div className='harry__answer text-base md:text-xl'>
+                    <ul className='harry__options mb-8'>
+                        {
+                            selectAnim.map((animation, index) => {
+                                const [ ans, house ] = Object.values(qaList.answer)[index]
+                                return (
+                                    <animated.li
+                                    className={`flex items-center relative before:content-[url(./assets/marker.svg)] before:h-full before:ml-4 before:relative align-center cursor-pointer rounded-full border-2 border-white my-4 last:mb-0 mt-0 ${select === house ? "selected" : ""}`}
+                                    data-house={house}
+                                    style={animation}
+                                    onClick={(e) => selectAnswer(e, index)}
+                                    key={`${house}${order}`}><span className="my-3 mx-4">{ans}</span></animated.li>
+                                )
+                            })
+                        }
+                    </ul>
+                    
+                    {order <= Object.keys(data).length &&
+                        <button
+                            type='button'
+                            className={`btn inline-block ${select ? 'btn-primary' : 'disabled:bg-grey'}`}
+                            disabled={!select}
+                            onClick={onNext}>
+                            Next
+                        </button>
                     }
-                </ul>
-                
-                {order <= Object.keys(data).length &&
-                    <button
-                        type='button'
-                        className={`btn inline-block ${select ? 'btn-primary' : 'disabled:bg-grey'}`}
-                        disabled={!select}
-                        onClick={onNext}>
-                        Next
-                    </button>
-                }
+                </div>
             </div>
         </div>
     )

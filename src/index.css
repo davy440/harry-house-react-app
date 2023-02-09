@@ -47,7 +47,15 @@
     @apply relative before:content[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before: bg-black;
   }
 
-  .house {
-    @apply w-1/4;
+  .bg-dark {
+    @apply p-8 bg-black/40 rounded-3xl;
+  }
+
+  .house img {
+    @apply mx-auto w-3/4 md:w-3/8;
+  }
+
+  .house-title {
+    @apply px-6;
   }
 }

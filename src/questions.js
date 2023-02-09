@@ -16,21 +16,22 @@ export const Questions = () => {
     })
 
     const questionAnim = useTransition(order, {
-        from: { opacity: 0},
-        enter: {opacity: 1},
-        leave: { opacity: 0},
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
         config: {
-            tension: 280,
-            friction: 14,
+            tension: 350,
+            friction: 5,
             duration: 100
-        }
+        },
+        exitBeforeEnter: true
     })
 
     return (
         questionAnim((style, item) => (
             item <= 5 
-            ? (<animated.div className='harry__questions absolute w-11/12 md:w-8/12 lg:w-6/12 mx-auto' style={style}><Question order={item} setOrder={setOrder} updateHouse={updateHouse} /></animated.div>)
-            : <animated.div className='harry__resultWrapper text-center' style={style}><Result house={ house } /></animated.div>
+            ? (<animated.div className='harry__questions absolute w-full h-full' style={style}><Question order={item} setOrder={setOrder} updateHouse={updateHouse} /></animated.div>)
+            : <animated.div className='harry__resultWrapper flex h-full text-center items-center justify-center' style={style}><Result house={ house } /></animated.div>
         ))
     )
 }

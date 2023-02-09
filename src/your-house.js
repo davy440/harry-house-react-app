@@ -30,33 +30,32 @@ export const YourHouse = ({ house }) => {
     
 
     return(
-        <div className='harry__yourHouse w-full'>
-            {(() => {
+            (() => {
                 switch(yourHouse) {
                     case 'G':
                         return(
-                            <animated.div className='house mx-auto' style={style}>
+                            <animated.div className='house relative mx-auto' style={style}>
                             <img className='harry__yourHouse--image w-full' src={griffindor} alt='Griffindor' />
                             <h2 className='house-title'>Griffindor</h2>
                             </animated.div>
                         )
                     case 'H':
                         return(
-                        <animated.div className='house mx-auto' style={style}>
+                        <animated.div className='house relative mx-auto' style={style}>
                             <img className='harry__yourHouse--image w-full' src={hufflepuff} alt='Hufflepuff' />
                             <h2 className='house-title'>Hufflepuff</h2>
                         </animated.div>
                         )
                     case 'R':
                         return(
-                        <animated.div className='house mx-auto' style={style}>
+                        <animated.div className='house relative mx-auto' style={style}>
                             <img className='harry__yourHouse--image w-full' src={ravenclaw} alt='Ravenclaw' />
                             <h2 className='house-title'>Ravenclaw</h2>
                         </animated.div>
                         )
                     case 'S':
                         return(
-                        <animated.div className='house mx-auto' style={style}>
+                        <animated.div className='house relative mx-auto' style={style}>
                             <img className='harry__yourHouse--image w-full' src={slytherin} alt='Slytherin' />
                             <h2 className='house-title'>Slytherin</h2>
                         </animated.div>
@@ -64,8 +63,7 @@ export const YourHouse = ({ house }) => {
                     default:
                         return;
                 }
-        })()}
+        })()
         
-        </div>
     )
 }
