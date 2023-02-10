@@ -106,7 +106,6 @@ export const Question = ({ order, setOrder, updateHouse }) => {
     const {question } = data[key]
 
     const selectAnswer = (e, i) => {
-        console.log(e)
         api.start((index) => (
             index === i
             ? { background: 'rgba(255,255,255,0.7)', color: 'black' }
