@@ -1,5 +1,6 @@
 import { useState, createContext } from 'react';
 import './App.css';
+import './assets/HARRYP__.TTF';
 import { animated, useTransition } from '@react-spring/web';
 import { Banner } from './Banner';
 import { House } from './house';

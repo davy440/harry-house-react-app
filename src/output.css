@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital@0;1&family=Philosopher:wght@700&display=swap');
 
+@font-face {
+  font-family: "Normal";
+
+  src: local("HarryPotter"), url("./assets/HARRYP__.TTF") format("truetype");
+}
+
 /*
 ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
 */
@@ -427,6 +433,10 @@ html{
   letter-spacing: 0.025em;
 }
 
+.font-harry {
+  font-family: "Normal";
+}
+
 h1{
   font-size: 6rem;
   line-height: 1;
@@ -663,10 +673,6 @@ p{
   top: 0px;
 }
 
-.top-\[25vh\]{
-  top: 25vh;
-}
-
 .z-20{
   z-index: 20;
 }
@@ -697,10 +703,6 @@ p{
 
 .mt-0{
   margin-top: 0px;
-}
-
-.mt-\[35vh\]{
-  margin-top: 35vh;
 }
 
 .inline-block{
@@ -816,12 +818,6 @@ p{
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.blur{
-  --tw-blur: blur(8px);
-  -webkit-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-          filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
 .drop-shadow-3l{
   --tw-drop-shadow: drop-shadow(0 0 10px rgba(0,0,0,1));
   -webkit-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -860,6 +856,60 @@ p{
 .house-title{
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.anim-scale {
+  -webkit-animation: scale 20s linear infinite alternate;
+          animation: scale 20s linear infinite alternate;
+}
+
+@-webkit-keyframes scale {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+
+@keyframes scale {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+
+.anim-glow {
+  -webkit-animation: glow 3s linear infinite alternate;
+          animation: glow 3s linear infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  0% {
+    text-shadow: 0 0 30px rgba(255,243,192,0.6), 0 0 30px rgba(255,243,192,0.6);
+  }
+
+  100% {
+    text-shadow: 0 0 60px rgba(255,243,192,1), 0 0 60px rgba(255,243,192,1), 0 0 60px rgba(255,243,192,1);
+  }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 30px rgba(255,243,192,0.6), 0 0 30px rgba(255,243,192,0.6);
+  }
+
+  100% {
+    text-shadow: 0 0 60px rgba(255,243,192,1), 0 0 60px rgba(255,243,192,1), 0 0 60px rgba(255,243,192,1);
+  }
 }
 
 .before\:absolute::before{

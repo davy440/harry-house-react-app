@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from "react"
 import { useSprings, animated } from "@react-spring/web"
+import { useDispatch } from "react-redux"
+import { updateHouse } from "./app/updateHouse"
 
-export const Question = ({ order, setOrder, updateHouse }) => {
+export const Question = ({ order, setOrder }) => {
+
+    const dispatch = useDispatch()
 
     const data = {
         q1: {
@@ -122,14 +126,15 @@ export const Question = ({ order, setOrder, updateHouse }) => {
 
         setOrder(prevOrder => prevOrder + 1)
 
-        updateHouse(prevHouse => {
-            prevHouse[count.current] += 1
-            return prevHouse
-        })
+        dispatch(updateHouse(count.current));
+        // updateHouse(prevHouse => {
+        //     prevHouse[count.current] += 1
+        //     return prevHouse
+        // })
     }
     
     return (
-        <div class="pt-20 w-11/12 md:w-8/12 lg:w-7/12 mx-auto">
+        <div className="pt-20 w-11/12 md:w-8/12 lg:w-7/12 mx-auto">
             <div className='harry__qa bg-dark backdrop-blur-sm'>
                 <h2 className='harry__question text-3xl md:text-4xl'>{question}</h2>
                 <div className='harry__answer text-base md:text-xl'>

@@ -2,10 +2,12 @@ import griffindor from './assets/houses/griffindor.png';
 import hufflepuff from './assets/houses/hufflepuff.png';
 import ravenclaw from './assets/houses/ravenclaw.png';
 import slytherin from './assets/houses/slytherin.png';
+import { useSelector } from "react-redux"
 import { useSpring, animated } from '@react-spring/web';
 
-export const YourHouse = ({ house }) => {
+export const YourHouse = () => {
 
+    const { house } = useSelector(state => state.houseInit)
     const style = useSpring({
         from: {
             scale: 0.4,
@@ -41,24 +43,24 @@ export const YourHouse = ({ house }) => {
                         )
                     case 'H':
                         return(
-                        <animated.div className='house relative mx-auto' style={style}>
-                            <img className='harry__yourHouse--image w-full' src={hufflepuff} alt='Hufflepuff' />
-                            <h2 className='house-title'>Hufflepuff</h2>
-                        </animated.div>
+                            <animated.div className='house relative mx-auto' style={style}>
+                                <img className='harry__yourHouse--image w-full' src={hufflepuff} alt='Hufflepuff' />
+                                <h2 className='house-title'>Hufflepuff</h2>
+                            </animated.div>
                         )
                     case 'R':
                         return(
-                        <animated.div className='house relative mx-auto' style={style}>
-                            <img className='harry__yourHouse--image w-full' src={ravenclaw} alt='Ravenclaw' />
-                            <h2 className='house-title'>Ravenclaw</h2>
-                        </animated.div>
+                            <animated.div className='house relative mx-auto' style={style}>
+                                <img className='harry__yourHouse--image w-full' src={ravenclaw} alt='Ravenclaw' />
+                                <h2 className='house-title'>Ravenclaw</h2>
+                            </animated.div>
                         )
                     case 'S':
                         return(
-                        <animated.div className='house relative mx-auto' style={style}>
-                            <img className='harry__yourHouse--image w-full' src={slytherin} alt='Slytherin' />
-                            <h2 className='house-title'>Slytherin</h2>
-                        </animated.div>
+                            <animated.div className='house relative mx-auto' style={style}>
+                                <img className='harry__yourHouse--image w-full' src={slytherin} alt='Slytherin' />
+                                <h2 className='house-title'>Slytherin</h2>
+                            </animated.div>
                         )
                     default:
                         return;
